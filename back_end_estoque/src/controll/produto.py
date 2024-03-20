@@ -90,7 +90,7 @@ class Produto:
             
             
 
-    def crecriarNovoProduto(produto):
+    def criarNovoProduto(produto):
         
         marca = produto['marca']
         descricao = produto['descricao']

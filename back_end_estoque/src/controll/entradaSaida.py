@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.model.produtoModel import Entradas
+from src.model.produtoModel import Entradas, Quantidades
 from src.controll.atualizaEstoque import AtualizaEstoque
 from src.configs.db import session
 
@@ -42,5 +42,7 @@ class EntradaSaida:
         
         return lista
         
-
+    def saidaProduto(produto):
+        produto_id = produto['produto_id']
+        session.query(Quantidades).filter(Quantidades.produto_id == produto_id)
 
