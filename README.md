@@ -1,22 +1,11 @@
 # Projeto controle de estoque  
-- Objetivo do sistema e controlar estoque de diferentes produtos, cadastrar os produtos por categoria, modelar de acordo para ter a flexibilidade de cadastrar o mesmo produto com diferentes características.  
+- Objetivo controlar estoque de diferentes produtos. Cadastro de produtos por categoria, isso nos dar a flexibilidade de cadastrar o mesmo produto com diferentes características.  
 Exemplo estoque de roupas:
 - Podemos cadastrar uma categoria roupas, e na descrição podemos adicionar (camiseta regata 100% algodão, manga cumprida 75% algodão, etc), lembrandro que está camiseta pode ter vários tipos de tamanho, cor, etc.
 
 ## Banco de dados  
 MYSQL versão 5.7  
-Configuração para conectar mysql:  
-- Na pasta **back_end_estoque/src/configs**, no arquivo db.py, alterar os dados de (usuário, senha, IPAddress, porta e database).    
-Exemplo de configuração:  
-//usuário  
-:senha  
-@IPAddress  
-:porta  
-/database  
-Iremos formar uma String igual exemplo abaixo:   
-**mysql+pymysql://usuário:senha@IPAddress:porta/database**
-
-Obs: mysql está rodando no container docker, após baixar a imagem mysql e criar o container, basta criar database **estoque**. Quando rodar o flask, as tabelas será criada automaticamente no banco de dados, pois estamos utilizando migrations sqlAchemy.
+Obs: mysql está rodando no container docker, após baixar a imagem mysql e criar o container, basta criar database **estoque**. Quando rodar o flask, as tabelas serpa criada automaticamente no banco de dados.
 
 ## back_end_estoque  
 Dependências para back-end  
