@@ -13,7 +13,7 @@ def inserirProdutos():
     temProduto = Produto.produtoPossuiCadastro(produto)
     if temProduto:
         return "Produto já possui cadastro"
-    Produto.create(produto)
+    Produto.criarNovoProduto(produto)
     return "produto inserido!"
 
 @app.route('/produtos')
@@ -51,6 +51,12 @@ def entradaProduto():
 def historicoEntradas(id):
     produto = EntradaSaida.historicoEntrada(id)
     return jsonify(produto)
+
+@app.route('/saidas', methods=['POST'])
+def saidaProduto():
+    produto = request.json
+    EntradaSaida.saidaProduto(produto)
+    return "Atualizado com sucesso!"
 
 if __name__ == '__main__':
     app.run(port=5000, host='0.0.0.0', debug=True)
