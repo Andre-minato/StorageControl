@@ -15,6 +15,7 @@ class EntradaSaida:
         data_insert = Entradas(produto_id=produto_id, tamanho=tamanho, qtde_entrada=qtde_entrada, cor=cor,
                             dataEntrada=data_time, horaEntrada=data_time)
         session.add(data_insert)
+        session.commit()
         isRegistered = AtualizaEstoque.estaRegistradoTabelaQuantidade(data_insert)
         if isRegistered:
             id = isRegistered["id"]
