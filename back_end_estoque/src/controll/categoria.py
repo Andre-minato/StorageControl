@@ -19,6 +19,7 @@ class Categoria:
         categoria_name = categoria['categoria'].upper()
         data_insert = Categorias(categoria=categoria_name)
         session.add(data_insert)
+        session.commit()
         return
     
     def possuiCadastro(categoria):

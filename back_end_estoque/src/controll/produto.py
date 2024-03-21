@@ -85,7 +85,7 @@ class Produto:
                     "categoria_id": produto[3],
                     "categoria": produto[4]
                 })
-            session.expire_all()
+            session.commit()
             return result
             
             
