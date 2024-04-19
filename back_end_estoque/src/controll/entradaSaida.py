@@ -9,8 +9,8 @@ class EntradaSaida:
     def entradaProduto(produto):
         data_time = datetime.now()
         produto_id = produto['produto_id']
-        tamanho = produto['tamanho']
-        cor = produto['cor']
+        tamanho = produto['tamanho'].upper()
+        cor = produto['cor'].upper()
         qtde_entrada = produto['qtde_entrada']
         data_insert = Entradas(produto_id=produto_id, tamanho=tamanho, qtde_entrada=qtde_entrada, cor=cor,
                             dataEntrada=data_time, horaEntrada=data_time)
@@ -24,6 +24,21 @@ class EntradaSaida:
             return
         AtualizaEstoque.novoProdutoTabelaQuantidade(data_insert)  
         return
+    
+    def saidaProduto(produto):
+        result = []
+        produto_id = produto['produto_id']
+        #qtde_entrada = produto['qtde_entrada']
+        data = session.query(Quantidades).filter(Quantidades.produto_id == produto_id).all()
+        
+        for produto in data:
+            result.append({
+                "id": produto.id,
+                "tamanho": produto.tamanho,
+                "cor": produto.cor,
+                "quantidade": produto.quantidade,
+            })
+        return result
 
     def historicoEntrada(id):
         lista = []
@@ -43,7 +58,6 @@ class EntradaSaida:
         
         return lista
         
-    def saidaProduto(produto):
-        produto_id = produto['produto_id']
-        session.query(Quantidades).filter(Quantidades.produto_id == produto_id)
+   
+           
 

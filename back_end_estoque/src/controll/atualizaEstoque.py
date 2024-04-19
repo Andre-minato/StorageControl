@@ -20,6 +20,7 @@ class AtualizaEstoque:
         cor = data.cor
         tamanho = data.tamanho
         produto_id = data.produto_id
+    
         data = session.query(Quantidades).filter(Quantidades.produto_id==produto_id).all()
         
         
@@ -39,6 +40,8 @@ class AtualizaEstoque:
         return
         
         
+    
+
 
         
         

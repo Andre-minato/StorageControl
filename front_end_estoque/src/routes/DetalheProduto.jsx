@@ -35,6 +35,12 @@ const DetalheProduto = () => {
         <table>
         <thead>
             <h2>Estoque do produto</h2>
+            {/* <select>
+              <option>COR</option>
+              {posts.map(cor => (
+                <option value={cor.cor}>{cor.cor}</option>
+              ))}
+            </select> */}
             <tr>
                 <th>Categoria</th>
                 <th>Tamanho</th>

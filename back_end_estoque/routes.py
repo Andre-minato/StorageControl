@@ -55,8 +55,16 @@ def historicoEntradas(id):
 @app.route('/saidas', methods=['POST'])
 def saidaProduto():
     produto = request.json
-    EntradaSaida.saidaProduto(produto)
-    return "Atualizado com sucesso!"
+    produto = EntradaSaida.saidaProduto(produto)
+    if produto:
+        return "Atualizado com sucesso!"
+    return "Tente mais tarde"
+
+@app.route('/produto_cor')
+def buscarQuantidadePelaCor():
+    produto = request.json
+    quantidade = Produto.buscarPorCor(produto)
+    return jsonify(quantidade)
 
 if __name__ == '__main__':
     app.run(port=5000, host='0.0.0.0', debug=True)

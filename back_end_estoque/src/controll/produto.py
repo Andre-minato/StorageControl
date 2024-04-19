@@ -92,8 +92,8 @@ class Produto:
 
     def criarNovoProduto(produto):
         
-        marca = produto['marca']
-        descricao = produto['descricao']
+        marca = produto['marca'].upper()
+        descricao = produto['descricao'].upper()
         categoria_id = produto['categoria_id']
         data_insert = Produtos(marca=marca, descricao=descricao, categoria_id=categoria_id)
         session.add(data_insert)
@@ -114,5 +114,41 @@ class Produto:
                     "categoria_id": produto.categoria_id
                 })
         return
-            
-                
+
+    #Está filtrado corretamente pelo id and cor
+    def buscarPorCor(produto):
+        result =[]
+        id = produto['id']
+        cor = produto['cor']
+        data = session.query(Produtos)\
+        .join(Categorias, Categorias.id == Produtos.categoria_id)\
+        .join(Quantidades, Quantidades.produto_id == Produtos.id)\
+        .filter(Produtos.id == id)\
+        .filter (Quantidades.cor == cor)\
+        .with_entities(
+                Produtos.id,
+                Produtos.marca,
+                Produtos.descricao,
+                Produtos.categoria_id,
+                Categorias.categoria,
+                Quantidades.tamanho,
+                Quantidades.cor,
+                Quantidades.quantidade,
+
+            )\
+            .all()
+        if data != []:
+            for produto in data:
+
+                result.append({
+                    "id": produto[0],
+                    "marca": produto[1],
+                    "descricao": produto[2],
+                    "categoria_id": produto[3],
+                    "categoria": produto[4],
+                    "tamanho": produto[5],
+                    "cor": produto[6],
+                    "quantidade": produto[7]
+                })
+
+            return result
