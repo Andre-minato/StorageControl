@@ -29,7 +29,6 @@ class Produto:
             })
         return result
         
-        
     def buscarProdutoPeloId(id):
         result = []
         data = session.query(Produtos)\
@@ -45,6 +44,7 @@ class Produto:
                 Quantidades.tamanho,
                 Quantidades.cor,
                 Quantidades.quantidade,
+                Quantidades.id
 
             )\
             .all()
@@ -59,7 +59,9 @@ class Produto:
                     "categoria": produto[4],
                     "tamanho": produto[5],
                     "cor": produto[6],
-                    "quantidade": produto[7]
+                    "quantidade": produto[7],
+                    "tbl_qtde_id": produto[8]
+                    
                 })
 
             return result
@@ -88,8 +90,6 @@ class Produto:
             session.commit()
             return result
             
-            
-
     def criarNovoProduto(produto):
         
         marca = produto['marca'].upper()
@@ -99,7 +99,6 @@ class Produto:
         session.add(data_insert)
         session.commit()
         
-
     def produtoPossuiCadastro(produto):
         marca = produto['marca']
         descricao = produto['descricao']
@@ -115,40 +114,4 @@ class Produto:
                 })
         return
 
-    #Está filtrado corretamente pelo id and cor
-    def buscarPorCor(produto):
-        result =[]
-        id = produto['id']
-        cor = produto['cor']
-        data = session.query(Produtos)\
-        .join(Categorias, Categorias.id == Produtos.categoria_id)\
-        .join(Quantidades, Quantidades.produto_id == Produtos.id)\
-        .filter(Produtos.id == id)\
-        .filter (Quantidades.cor == cor)\
-        .with_entities(
-                Produtos.id,
-                Produtos.marca,
-                Produtos.descricao,
-                Produtos.categoria_id,
-                Categorias.categoria,
-                Quantidades.tamanho,
-                Quantidades.cor,
-                Quantidades.quantidade,
-
-            )\
-            .all()
-        if data != []:
-            for produto in data:
-
-                result.append({
-                    "id": produto[0],
-                    "marca": produto[1],
-                    "descricao": produto[2],
-                    "categoria_id": produto[3],
-                    "categoria": produto[4],
-                    "tamanho": produto[5],
-                    "cor": produto[6],
-                    "quantidade": produto[7]
-                })
-
-            return result
+    

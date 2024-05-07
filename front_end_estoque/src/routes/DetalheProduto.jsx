@@ -5,6 +5,7 @@ import "./DetalheProduto.css"
 import { Link } from "react-router-dom"
 
 const DetalheProduto = () => {
+  const produtoCaracteristica = null
   const { id } = useParams()
   const [posts, setPosts] = useState({})
   const getPost = async() => {
@@ -21,6 +22,11 @@ const DetalheProduto = () => {
   useEffect(() => {
     getPost()
   }, [])
+
+  
+  document.getElementsByClassName('.btn-entrada').disable=true
+  document.getElementById('btn-saida')
+  
   
   return (
     <div className="post-container">
@@ -28,37 +34,48 @@ const DetalheProduto = () => {
         <p>Sem produto em estoque!</p>
       ) : ( 
       <div className="post">
-        <h3>Produto: {posts[0].categoria}</h3><br />
-        <p><strong>Marca: </strong>{posts[0].marca}</p>
-        <p><strong>Descrição: </strong>{posts[0].descricao}</p><br />
-        
+        <h3>Categoria: {posts[0].categoria}</h3><br />
+        <p><strong>Produto: </strong>{posts[0].descricao}</p>
+        <p><strong>Marca: </strong>{posts[0].marca}</p><br />
+        <div className="btn-tamanho-cor">
+          <ul>
+          <li>
+            <Link to={`/cor_tamanho/${id}`} className="btn-entrada">Adicionar tamanho e cor</Link>
+            </li>
+            <li>
+              <Link to={`/entradas/${id}`} className='btn-entrada'>historico entrada</Link>
+            </li>
+            <li>
+              <Link to={`/saidas/${id}`} className="btn-entrada">historico de saída</Link> 
+            </li>
+          </ul>
+        </div><br />
         <table>
+          
         <thead>
-            <h2>Estoque do produto</h2>
-            {/* <select>
-              <option>COR</option>
-              {posts.map(cor => (
-                <option value={cor.cor}>{cor.cor}</option>
-              ))}
-            </select> */}
+            <h3>Estoque do produto</h3>
             <tr>
-                <th>Categoria</th>
-                <th>Tamanho</th>
+                <th>Produto</th>
                 <th>Marca</th>
-                <th>Descrição</th>
+                <th>Tamanho</th>
                 <th>Cor</th>
                 <th>Quantidade</th>
+                <th>Opções</th>
             </tr>
         </thead>
         <tbody>
           {posts.map(item => (
             <tr key={item.id} className="item">
-              <td>{item.categoria}</td>
-              <td>{item.tamanho}</td>
-              <td>{item.marca}</td>
               <td>{item.descricao}</td>
+              <td>{item.marca}</td>
+              <td>{item.tamanho}</td>
               <td>{item.cor}</td>
               <td>{item.quantidade}</td>
+              
+              <td>
+                <Link to={`/saida_produto/${item.id}/${item.descricao}/${item.marca}/${item.cor}/${item.tamanho}/${item.quantidade}`} className="btn-saida" id="btn-saida">Saída</Link>
+                <Link to={`/entrada_produto/${item.id}/${item.descricao}/${item.marca}/${item.cor}/${item.tamanho}` } className="btn-entrada" onClick={()=> setEnabled(false)}>entrada</Link>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -70,3 +87,4 @@ const DetalheProduto = () => {
 }
 
 export default DetalheProduto
+

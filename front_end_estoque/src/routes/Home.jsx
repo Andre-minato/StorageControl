@@ -38,16 +38,16 @@ const Home = () => {
                   detalhe produto
                 </Link><br />
               </li>
+              {/* <li>
+                <Link to={`/entradas/${post.id}`} className='btn'>
+                  historico produto
+                </Link>
+              </li>
               <li>
-              <Link to={`/entradas/${post.id}`} className='btn'>
-                historico produto
-              </Link>
-          </li>
-          <li>
-            <Link to={`entrada_produto/${post.id}`} className="btn">
-              Entrada produto
-            </Link>
-          </li>
+                  <Link to={`saidas/${post.id}`} className="btn">
+                    Historico Saida
+                  </Link>
+              </li>  */}
             </ul>
           </div>
         ))

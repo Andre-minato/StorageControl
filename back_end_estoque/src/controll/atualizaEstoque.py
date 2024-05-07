@@ -15,8 +15,9 @@ class AtualizaEstoque:
         session.add(data_insert)
         session.commit()
         return
-        
+    
     def estaRegistradoTabelaQuantidade(data):
+
         cor = data.cor
         tamanho = data.tamanho
         produto_id = data.produto_id
@@ -34,8 +35,9 @@ class AtualizaEstoque:
                     "produto_id": Quantidade.produto_id
                 }
         return
-    def atualizandoQuantidade(id, vlr_atual):
-        session.query(Quantidades).filter(Quantidades.id == id).update({Quantidades.quantidade: vlr_atual})
+    
+    def atualizandoQuantidade(id, qtde_entrada):
+        session.query(Quantidades).filter(Quantidades.id == id).update({Quantidades.quantidade: qtde_entrada})
         session.commit()
         return
         

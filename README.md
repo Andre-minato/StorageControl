@@ -30,9 +30,11 @@ obs: rodar os comandos dentro da pasta beck_end_estoque.
 - Instalar ORM sqlAchemy versão 1.4.17   
 `pip install SQLAlchemy==1.4.17`  
 
-- Intalar conector do python com mysql "pymysql"  
+- Instalar conector do python com mysql "pymysql"  
 `pip install pymysql`  
 
+- Instalar bcrypt para criptografar senhas
+`pip install bcrypt`
 
 ## front_end_estoque  
 Dependências para o front deve ter node instalado.  

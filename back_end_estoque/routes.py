@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 from src.controll.produto import Produto
 from src.controll.categoria import Categoria
 from src.controll.entradaSaida import EntradaSaida
+from src.controll.usuario import Usuario
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -41,7 +42,7 @@ def getCategoria():
     categoria = Categoria.buscarTodasCategorias()
     return jsonify(categoria)
 
-@app.route('/entradas', methods=['POST'])
+@app.route('/entradas', methods=['PUT'])
 def entradaProduto():
     produto = request.json
     EntradaSaida.entradaProduto(produto)
@@ -55,16 +56,36 @@ def historicoEntradas(id):
 @app.route('/saidas', methods=['POST'])
 def saidaProduto():
     produto = request.json
-    produto = EntradaSaida.saidaProduto(produto)
-    if produto:
-        return "Atualizado com sucesso!"
-    return "Tente mais tarde"
+    EntradaSaida.saidaProduto(produto)
+    return "Atualizado com sucesso!"
 
-@app.route('/produto_cor')
-def buscarQuantidadePelaCor():
-    produto = request.json
-    quantidade = Produto.buscarPorCor(produto)
-    return jsonify(quantidade)
+@app.route('/saidas/<int:id>')
+def historicoSaida(id):
+    produto = EntradaSaida.historicoSaida(id)
+    return jsonify(produto)
 
+@app.route('/cadastro', methods=['POST'])
+def cadastro_ususario():
+    data_usuario = request.json
+    usuario = Usuario.cadastro(data_usuario)
+    if not usuario:
+        return "Erro ao cadastrar usuário"
+    return jsonify(usuario)
+    
+@app.route('/login', methods=['POST'])
+def login():
+    data_usuario = request.json
+    usuario = Usuario.login(data_usuario)
+    if usuario == False:
+        return "Não existe cadastro"
+    return jsonify(usuario)
+
+@app.route('/tamanho_cor', methods=['POST'])
+def cadastroTamanhoCor():
+    caracteristica = request.json
+    caracteristica = EntradaSaida.cadastroTamanhoCor(caracteristica)
+    if caracteristica:
+        return make_response(jsonify("Já possui cadastro para característica informada!"), 400)
+    return make_response(jsonify("Características adicionada com sucesso!"), 201)
 if __name__ == '__main__':
     app.run(port=5000, host='0.0.0.0', debug=True)
