@@ -20,8 +20,8 @@ const SaidaProduto = () => {
 
     const saidaProduto = async(e) => {
         e.preventDefault()
-        console.log(quantidade)
-        if(quantidade >= qtde_saida){
+
+        if(Number(quantidade) >= qtde_saida){
           await blogFetch.post("/saidas", {
             produto_id,
             tamanho,
@@ -30,12 +30,12 @@ const SaidaProduto = () => {
           })
           navigate(`/produtos/${id}`)
           
-        } else {
+          } else {
           
           alert("Quantidade de saída não pode ser maior que a quantidade em estoque!")
           navigate(`/produtos/${id}`)
       }
-}
+    }
 
       
       
