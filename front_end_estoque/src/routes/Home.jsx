@@ -25,7 +25,7 @@ const Home = () => {
   
   return (
     <div className='home'>
-      <h1>Produtos em estoque</h1>
+      <h1>Produtos</h1><br />
       {posts.length === 0 ? (<p>Não tem produto em estoque!</p>) : (
         posts.map((post) => (
           <div className="post" key={post.id}>
@@ -34,20 +34,10 @@ const Home = () => {
             <p><strong>Marca: </strong>{post.marca}</p><br />
             <ul>
               <li>
-                <Link to={`/produtos/${post.id}`} className='btn'>
-                  detalhe produto
+                <Link to={`/produtos/${post.id}`} className='new-btn' >
+                  Detalhe Produto
                 </Link><br />
               </li>
-              {/* <li>
-                <Link to={`/entradas/${post.id}`} className='btn'>
-                  historico produto
-                </Link>
-              </li>
-              <li>
-                  <Link to={`saidas/${post.id}`} className="btn">
-                    Historico Saida
-                  </Link>
-              </li>  */}
             </ul>
           </div>
         ))

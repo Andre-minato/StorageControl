@@ -17,17 +17,28 @@ const SaidaProduto = () => {
     const [qtde_saida, setQtde_saida] = useState([])
 
     const produto_id = id
+
     const saidaProduto = async(e) => {
         e.preventDefault()
-      
-        await blogFetch.post("/saidas", {
-          produto_id,
-          tamanho,
-          cor,
-          qtde_saida
-        })
-        navigate(`/produtos/${id}`)
+        console.log(quantidade)
+        if(quantidade >= qtde_saida){
+          await blogFetch.post("/saidas", {
+            produto_id,
+            tamanho,
+            cor,
+            qtde_saida
+          })
+          navigate(`/produtos/${id}`)
+          
+        } else {
+          
+          alert("Quantidade de saída não pode ser maior que a quantidade em estoque!")
+          navigate(`/produtos/${id}`)
       }
+}
+
+      
+      
       
   return (
     <div className='new-post'>

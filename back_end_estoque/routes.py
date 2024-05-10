@@ -45,7 +45,9 @@ def getCategoria():
 @app.route('/entradas', methods=['PUT'])
 def entradaProduto():
     produto = request.json
-    EntradaSaida.entradaProduto(produto)
+    atualizar_produto = EntradaSaida.entradaProduto(produto)
+    if atualizar_produto == False:
+        return make_response(jsonify("Erro interno"), 400)
     return "Atualizado com sucesso!"
 
 @app.route('/entradas/<int:id>')

@@ -19,10 +19,11 @@ const EntradaProduto = () => {
   const [qtde_entrada, setQtde_entrada] = useState([])
   const produto_id = id
 
+  
+  
 
   const inserirProduto = async(e) => {
       e.preventDefault()
-    
       await blogFetch.put("/entradas", {
         tamanho,
         qtde_entrada,
@@ -30,6 +31,7 @@ const EntradaProduto = () => {
         produto_id
       })
       navigate(`/produtos/${id}`)
+       
     }
 
 
@@ -54,7 +56,7 @@ const EntradaProduto = () => {
           onChange={(e) => setQtde_entrada(e.target.value)}
         />
       </div>
-      <input type="submit" value="Cadastrar" className='btn'/>
+      <input type="submit" value="Salvar" className='btn'/>
       </form>
     </div>
   )
