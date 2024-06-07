@@ -42,9 +42,9 @@ const DetalheProduto = () => {
             <li>
               <Link to={`/entradas/${id}`} className='btn-entrada' id="btn-entrada" >historico entrada</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to={`/saidas/${id}`} className="btn-entrada" id="btn-saida">historico de saída</Link> 
-            </li> */}
+            </li>
           </ul>
         </div><br />
         <table>

@@ -69,27 +69,3 @@ const SaidaProduto = () => {
 
 export default SaidaProduto
 
-
-
-
-
-
-// return (
-//   <div className='post_saida'>
-//     <h2>Saida de Produtos!</h2>
-//     <form onSubmit={(e) => saidaProduto(e)}>
-//     <div className="form-control">
-//       <label htmlFor="sida_produto">Quantidade:</label>
-//       <input
-//         type="text"
-//         name='saida_produto'
-//         id='saida_produto'
-//         placeholder='Inserir quantidade de saida'
-//         onChange={(e) => setQtde_saida(e.target.value)}
-//       />
-//     </div>
-//     <input type="submit" value="Cadastrar" className='btn'/>
-//     </form>
-//   </div>
-// )
-// }
