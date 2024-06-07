@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, BigInteger, DATE, Time, Table
+from sqlalchemy import Column, String, Integer, ForeignKey, BigInteger, DATE, Time
 from sqlalchemy.orm import relationship
 
 
@@ -17,7 +17,7 @@ class Categorias(Base):
 
     def __repr__(self):
         return f'Categoria (id={self.id}, name={self.categoria}'
-Base.metadata.create_all(engine)
+
 
 class Produtos(Base):
     __tablename__ = 'produtos'
@@ -33,7 +33,7 @@ class Produtos(Base):
 
     def __repr__(self):
         return f'Produto (id={self.id}, marca={self.marca}, tamanho={self.tamanho}, cor={self.cor}), quantidade={self.quantidade}'
-Base.metadata.create_all(engine)
+
 
 class Entradas(Base):
     __tablename__='entradas'
@@ -49,7 +49,7 @@ class Entradas(Base):
 
     def __repr__(self):
         return f'Entrada (id={self.id}, tamanho={self.tamanho}, cor={self.cor}, qtde_entrada={self.qtde_entrada}'
-Base.metadata.create_all(engine)
+
 
 class Saidas(Base):
     __tablename__='saidas'
@@ -66,7 +66,6 @@ class Saidas(Base):
 
     def __repr__(self):
         return f'Entrada (id={self.id}, data={self.data}, quantidade={self.quantidade}'
-Base.metadata.create_all(engine)
 
 class Quantidades(Base):
     __tablename__='quantidades'
@@ -74,7 +73,7 @@ class Quantidades(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     tamanho = Column(String(6))
     cor = Column(String(30))
-    quantidade = Column(BigInteger, default=0)
+    quantidade = Column(BigInteger, default=None, nullable=True)
     produto_id = Column(Integer, ForeignKey('produtos.id'))
     entrada_id = Column(Integer, ForeignKey('entradas.id'), nullable=True)
     saida_id = Column(Integer, ForeignKey('saidas.id'), nullable=True)
@@ -82,4 +81,19 @@ class Quantidades(Base):
 
     def __repr__(self):
         return f'Quantidade (id={self.id}, tamanho={self.tamanho}, quantidade={self.quantidade}, produto_id={self.produto_id})'
+
+class Usuarios(Base):
+    __tablename__='usuarios'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nome = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=False, unique=True)
+    cpf = Column(String(11), nullable=False)
+    senha = Column(String(255), nullable=False)
+
+    def __repr__(self):
+        return f'Usuarios (id={self.id}, nome={self.nome}, email={self.email}, cpf={self.cpf}, senha={self.senha})'
 Base.metadata.create_all(engine)
+
+
+
+# Verificar as colunas da tabela:

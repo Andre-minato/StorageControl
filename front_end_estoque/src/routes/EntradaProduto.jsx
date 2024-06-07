@@ -12,22 +12,26 @@ const EntradaProduto = () => {
   const navigate = useNavigate()
 
   const {id} = useParams()
-  const [tamanho, setTamanho] = useState([])
+  const {descricao} = useParams()
+  const {marca} = useParams()
+  const {cor} = useParams()
+  const {tamanho} = useParams()
   const [qtde_entrada, setQtde_entrada] = useState([])
-  const [cor, setCor] = useState([])
   const produto_id = id
 
+  
+  
 
   const inserirProduto = async(e) => {
       e.preventDefault()
-    
-      await blogFetch.post("/entradas", {
+      await blogFetch.put("/entradas", {
         tamanho,
         qtde_entrada,
         cor,
         produto_id
       })
-      navigate("/")
+      navigate(`/produtos/${id}`)
+       
     }
 
 
@@ -36,24 +40,11 @@ const EntradaProduto = () => {
       <h2>Entrada de Produtos!</h2>
       <form onSubmit={(e) => inserirProduto(e)}>
       <div className="form-control">
-        <label htmlFor="tamanho-produto">Tamanho:</label>
-        <input
-          type="text"
-          name='tamanho-produto'
-          id='tamanho-produto'
-          placeholder='Inserir tamanho do produto'
-          onChange={(e) => setTamanho(e.target.value)}
-        />
-      </div>
-      <div className="form-control">
-        <label htmlFor="cor-produto">Cor:</label>
-        <input
-          type="text"
-          name='cor-produto'
-          id='cor-produto'
-          placeholder='Inserir cor do produto'
-          onChange={(e) => setCor(e.target.value)}
-        />
+        <label htmlFor="tamanho-produto"><h3>Descrição do Produto: </h3></label>
+        <p><strong>Produto:</strong> ( {descricao} )</p>
+        <p><strong>Marca:</strong> ( {marca} )</p>
+        <p><strong>Cor:</strong> ( {cor} )</p>
+        <p><strong>Tamanho:</strong> ( {tamanho} )</p>
       </div>
       <div className="form-control">
         <label htmlFor="quantidade-produto">Quantidade:</label>
@@ -65,7 +56,7 @@ const EntradaProduto = () => {
           onChange={(e) => setQtde_entrada(e.target.value)}
         />
       </div>
-      <input type="submit" value="Cadastrar" className='btn'/>
+      <input type="submit" value="Salvar" className='btn'/>
       </form>
     </div>
   )

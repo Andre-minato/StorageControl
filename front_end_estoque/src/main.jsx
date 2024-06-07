@@ -10,6 +10,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom'
 import './index.css'
+import HistoricoSaida from './routes/HistoricoSaida.jsx'
+import SaidaProduto from './routes/SaidaProduto.jsx'
+import CorTamanho from './routes/CorTamanho.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,12 +39,24 @@ const router = createBrowserRouter([
         element: <HistoricoEntrada />
       }, 
       {
-        path: "nova_categoria",
+        path: "/nova_categoria",
         element: <NovaCategoria />
       },
       {
-        path: "/entrada_produto/:id",
+        path: "/entrada_produto/:id/:descricao/:marca/:cor/:tamanho",
         element: <EntradaProduto />
+      },
+      {
+        path: "/saida_produto/:id/:descricao/:marca/:cor/:tamanho/:quantidade",
+        element: <SaidaProduto />
+      },
+      {
+        path: "/saidas/:id",
+        element: <HistoricoSaida />
+      },
+      {
+        path: "/cor_tamanho/:id",
+        element: <CorTamanho />
       }
     ]
   }

@@ -1,20 +1,19 @@
 import blogFetch from "../axios/config"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import "./HistoricoEntrada.css"
 
+import "./HistoricoSaida.css"
 
-
-const HistoricoEntrada = () => {
+const HistoricoSaida = () => {
     const { id } = useParams()
 
-    const [entrada, setEntrada] = useState([])
+    const [saida, setSaida] = useState([])
 
-    const getEntrada = async() => {
+    const getSaida = async() => {
       try {
-        const response = await blogFetch.get(`/entradas/${id}`)                                       
+        const response = await blogFetch.get(`/saidas/${id}`)                                       
         const data = await response.data
-        setEntrada(data)
+        setSaida(data)
         console.log(await data[0])
         
       } catch (error) {
@@ -23,18 +22,18 @@ const HistoricoEntrada = () => {
     }
   
     useEffect(() => {
-      getEntrada()
+      getSaida()
     }, [])
 
 
   return (
-    <div className="container_detalhe">
+    <div className="container">
         <table>
         <thead>
-            <h2>Histórico de entrada</h2><br />
+            <h2>Histórico de Saída</h2><br />
             <tr>
-                <th>Data Entrada</th>
-                <th>Hora de Entrada</th>
+                <th>Data de Saida</th>
+                <th>Hora de Saida</th>
                 <th>Tamanho</th>
                 <th>Cor</th>
                 <th>Quantidade</th>
@@ -42,7 +41,7 @@ const HistoricoEntrada = () => {
             </tr>
         </thead>
         <tbody>
-          {entrada.map(item => (
+          {saida.map(item => (
             <tr key={item.id} className="item">
               <td>{item.data_entrada}</td>
               <td>{item.hora_entrada}</td>
@@ -58,4 +57,4 @@ const HistoricoEntrada = () => {
   )
 }
 
-export default HistoricoEntrada
+export default HistoricoSaida
